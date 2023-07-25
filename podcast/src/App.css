@@ -1,0 +1,45 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  
+}
+
+
+body{
+  background-color: rgba(64, 61, 61, 0.116);
+  
+}
+
+.card {
+  width: 500px;
+  font-size: 10px;
+  flex-basis: 225px;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.642);
+  border-radius: 10px;
+  padding: 30px;
+  padding-top: 10px;
+
+}
+
+.card--images {
+  width: 100%;
+  height: auto;
+  align-self: center;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.appBar {
+  background-color: rgb(129, 117, 117);
+
+}
+
+.ShowMoreButton {
+  background-color: black;
+}
+
+.season-img{
+  width: 10%;
+}
