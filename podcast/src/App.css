@@ -1,18 +1,52 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  
+.hey {
+
+  width: 100%;
+  height: 30%;
+
 }
 
+.header {
 
-body{
-  background-color: rgba(64, 61, 61, 0.116);
-  
+  height: 70px;
+  width: 100%;
+  background-color: #F1EFE7;
+  color: rgb(101, 92, 92);
+  padding: 0.5%;
+  position: sticky;
+  top: 85px;
+  z-index: 1;
+
+
 }
 
-.card {
+.header>ul {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+  padding-top: 1%;
+  font-weight: bold;
+  font-size: 1em;
+
+
+  @media (max-width: 500px) {
+
+    font-size: 0.8em;
+    height: 50px;
+
+  }
+
+}
+
+.header li:hover {
+
+  border-bottom: 4px solid rgb(64, 200, 221);
+  cursor: pointer;
+
+}
+
+.Card--card{
   width: 500px;
   font-size: 10px;
   flex-basis: 225px;
@@ -20,10 +54,17 @@ body{
   border-radius: 10px;
   padding: 30px;
   padding-top: 10px;
+  transition: transform 0.3s ease;
 
-}
+  @media(min-width: 700px){
 
-.card--images {
+    
+  }
+  
+  
+} 
+
+.card--images{
   width: 100%;
   height: auto;
   align-self: center;
@@ -31,15 +72,54 @@ body{
   object-fit: cover;
 }
 
-.appBar {
-  background-color: rgb(129, 117, 117);
+
+.t-dOnDMp {
+
+  margin: 5% auto 0 auto;
+  padding: 1% 4%;
+  width: 70%;
+  border: 4px solid rgb(64, 200, 221);
+  border-radius: 40px;
+
+  @media (min-width: 760px) {
+    width: 50%;
+
+  }
+
+  @media (min-width: 1440px) {
+
+    width: 30%;
+
+  }
+
+  .supabase-auth-ui_ui-button {
+
+    background-color: rgb(123, 114, 114);
+    width: 100%;
+    margin: auto;
+    border: solid rgb(64, 200, 221);
+    border-radius: 100px;
+
+    @media (min-width: 760px) {
+      display: flex;
+      flex-direction: row;
+      width: 70%;
+
+    }
+  }
+
+  .c-jTXIoq-bXHFxK-gap-large {
+
+    width: 100%;
+
+  }
 
 }
 
-.ShowMoreButton {
-  background-color: black;
-}
-
-.season-img{
-  width: 10%;
+.Logo--gif {
+  width: 100px;
+  margin-right: 10px;
+  padding: 10px;
+  border-radius: 10%;
+  transition: transform 0.3s ease;
 }
