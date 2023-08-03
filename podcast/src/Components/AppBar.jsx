@@ -3,7 +3,6 @@ import { Navbar, Nav } from 'react-bootstrap';
 import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse';
 import NavbarToggle from 'react-bootstrap/esm/NavbarToggle';
 import '../App.css';
-import SearchBar from './SearchBar';
 import Button from '@mui/material/Button'
 
 const navLinkStyling = {
@@ -17,18 +16,22 @@ const navBrandStyling = {
 
   color: 'white',
   fontWeight: 'bold',
-  fontSize: '2em',
+  fontSize: '3.5 em',
 
 };
 
 const navbarStyling = {
 
-  backgroundColor: 'rgb(129, 117, 117)',
+  backgroundColor: '#26A69A',
   padding: '1% 7%',
 
 };
 
 export default function AppBar(props) {
+
+  if(!props.isLoggedIn) {
+    return null;
+  }
 
   return (
 
@@ -54,9 +57,7 @@ export default function AppBar(props) {
 
             : null}
 
-            <Nav.Link style={navLinkStyling} href="#Podcasts">
-              Podcasts
-            </Nav.Link>
+           
 
             {props.isLoggedIn ? 
             <Button style={navLinkStyling} onClick={props.onLogout}>
@@ -72,21 +73,13 @@ export default function AppBar(props) {
       </Navbar>
 
       { props.isLoggedIn?
+
+
+
+
       
       <div className="header">
         
-        <ul>
-
-          <li>Sort by [A-Z]</li>
-          <li>Sort by [Z-A]</li>
-          <li>Sort by latest</li>
-          <li>Sort by oldest</li>
-          <li>Filter by genre</li>
-          
-        </ul>
-
-        <SearchBar />
-
       </div>
 
       : null}

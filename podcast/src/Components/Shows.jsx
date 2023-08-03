@@ -7,10 +7,10 @@ import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Rating from '@mui/material/Rating';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+
 import '../App.css'
 
 import { createTheme } from '@mui/material';
@@ -32,14 +32,26 @@ export default function Shows(props) {
 
     const [value, setValue] = useState(null)
     const [open, setOpen] = useState(false);
-
+    const showId = 'https://podcast-api.netlify.app/id/${showId}'; // Replace 'your-show-id' with the actual ID of the show
+    const [favorited, setFavorited] = useState(false);
+    
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const handleRatingChange = (event, newValue) => {
+        setValue(newValue);
+        setFavorited(newValue === 5); // Set favorited to true when the Rating is clicked
+    };
+
+    const handleRemoveFavorite = () => {
+        setFavorited(false);
+        setValue(null); // Reset the rating value to null when removing the favorite status
+    };
 
     const style = {
 
         position: 'absolute',
-        backgroundColor: '#296647',
+        backgroundColor: 'rgb(101, 92, 92)',
         color: 'white',
         padding: '0 4%  0 4%',
         top: '50%',
@@ -54,7 +66,7 @@ export default function Shows(props) {
         boxShadow: 24,
         [theme.breakpoints.up('sm')]: {
             height: '70%',
-            width: '70%',
+            width: '60%',
         },
 
         [theme.breakpoints.up('md')]: {
@@ -65,7 +77,11 @@ export default function Shows(props) {
 
     return (
 
+
         <Grid item xs={12} sm={6} md={4} lg={3} >
+
+            
+            
 
             <Card sx={{borderBottom: '5px solid rgb(64, 200, 221) ', }}>
                 <CardMedia
@@ -79,13 +95,16 @@ export default function Shows(props) {
                 />
                 
 
-
-
                 <CardHeader
+
                 
                     title={props.title}
+
+                     
+                
+                     
                     subheader = {'Last updated: ' + new Date(props.updated).toISOString().substring(0, 10)}
-                    sx={{bgcolor:'rgb(101, 92, 92)',  height: { xs: 50, md: 90 }}}
+                    sx={{bgcolor:'rgb(101, 92, 92)',  height: { xs: 50, md: 90 } } }
                     titleTypographyProps={{
 
                         variant: 'h5',
@@ -131,11 +150,14 @@ export default function Shows(props) {
                         <img className='hey' style={{position: 'sticky', top: 42}} src={props.image} alt='pic'></img>
 
 
-                        <Typography sx={{position: 'sticky', top: 0, color: 'white', fontSize: '2em', backgroundColor: '#296647',}} id="modal-modal-title" variant="h6" component="h2">
+                        <Typography sx={{position: 'sticky', top: 0, color: 'black', fontSize: '2em', backgroundColor: 'white',}} id="modal-modal-title" variant="h6" component="h2">
                             {props.title}
                         </Typography>
 
-                        
+                        <Typography sx={{position: 'sticky', top: 0, color: 'black', fontSize: '2em', backgroundColor: 'white',}} id="modal-modal-title" variant="h6" component="h2">
+                           Season {props.seasons}
+                        </Typography>
+
                 
                         <Typography id="modal-modal-description" sx={{ p: '6 4 4 4'}}>
                             {props.description}
@@ -150,18 +172,26 @@ export default function Shows(props) {
                 </Modal>
 
                 <CardActions disableSpacing sx={{ display: 'flex', justifyContent: 'space-between'  }}>
+                    
+                {favorited ? (
 
+                    <Button variant='text' color='success' onClick={handleRemoveFavorite}>
+                        Remove Favorite
+                    </Button>
+
+                   
+                    ) : (
                     <Rating
 
                             name="simple-controlled"
                             value={value}
-                            onChange={(event, newValue) => {
-                                setValue(newValue);
-                            }}
+                            onChange={handleRatingChange}
+                            max ={5}  
+                            
                             
                     />
-
-                    <Button variant='text' color='success' onClick={handleOpen} >More info</Button>
+                )}
+                   <Button variant='text' color='success' onClick={handleOpen} >More info</Button>
 
                 </CardActions>
 

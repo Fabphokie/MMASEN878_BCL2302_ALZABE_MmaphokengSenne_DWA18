@@ -1,43 +1,85 @@
 import { useEffect, useState } from "react";
-// import UseFetch from "./UseFetch";
+// import HH from "./Seasons";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
 
 export default function SignUp(props) {
+    const [seasonss, setSeasons] = useState([]);
+    const [epi, setEpi] = useState(null)
+    const [epiFile, setEpiFile] = useState(null)
+    const [isOpen, setIsOpen] = useState(false)
 
-    const [datas, setDatas] = useState(null)
+    function handlePlay(epiFile){
+        setIsOpen(!open)
+        setEpiFile(epiFile)
+    }
 
     useEffect(() => {
-
         if (props.idno) {
-            // const [data, errorStatus, loading] = UseFetch(`https://podcast-api.netlify.app/id/${props.idno}`);
-
             fetch(`https://podcast-api.netlify.app/id/${props.idno}`)
                 .then(response => response.json())
                 .then(data => {
+                    setSeasons(data);
+                    // seasonss.season.map((sea) => {console.log(sea)})
+                    
+                    const ey = seasonss.seasons
+                    const bb = ey.map((y)=> {
+                        
+                        return(
 
-                    const bb = data.seasons
+                            <Accordion key={y.title}>
 
-                    const cc = bb.map((pp) => {
+                            <AccordionSummary expandIcon = {<ExpandMoreIcon />} aria-controls="panel1a-content" id="panella-header">
+                                <Typography component='h1'>Seasons</Typography>
+                                <div style={{display: 'flex', flexDirection:'column'}}>
 
-                        return (
+                                    <Typography component='h5'>{y.title}</Typography>
+                                    {/* <Typography component='p'>{y.season}</Typography> */}
+                                </div>
+                            </AccordionSummary>
 
+                            <AccordionDetails>
+                                
+                                <ul>
 
+                                    
+                                    {y.episodes.map((episode, index) => {
 
-                            <h1>{pp.title}</h1>
+                                        console.log(episode.file)
 
+                                       return (
+                                            <div key={index}>
+                                                <p onClick={handlePlay}>{episode.title}</p>
+                                                <audio controls>
+                                                    <source src={episode.file} type="audio/ogg" />
+                                                </audio>
+                                            </div>
+
+                                        )
+                                    })}
+                                </ul>
+                            </AccordionDetails>
+                            </Accordion>
                         )
-
+                    
+                    
                     })
-
-                    setDatas(cc)
+                    setEpi(bb)
                 })
         }
-    }, [props.idno])
+    }, [props.idno]);
 
+
+    
     return (
-        <div>
-            {datas}
+        <div style={{ border: '1px solid #ccc', padding: '10px', borderRadius: '20px', background: '#f9f9f9',  }}>
+            {epi}
+        
         </div>
-    )
-
-
+    );
 }

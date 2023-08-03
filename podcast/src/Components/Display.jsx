@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
+import Shows from './Shows';
 import UseFetch from './UseFetch';
 import CircularProgress from '@mui/material/CircularProgress';
-import Footer from './Footer';
 import Grid from '@mui/material/Grid';
 import FAB from './FAB';
 import '../App.css';
@@ -9,7 +9,10 @@ import SignUp from './SignUp';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import Shows from './Shows';
+import MyCarouselContainer from './MyCarouselContainer';
+
+
+
 
 const DropdownMenu = ({ handleSort, sortOrder }) => {
 
@@ -58,12 +61,30 @@ const DropdownMenu = ({ handleSort, sortOrder }) => {
 
 };
 
+
 function Display() {
 
+    
     const [data, errorStatus, loading] = UseFetch('https://podcast-api.netlify.app/shows');
     const [ids, setIds] = useState(null);
     const [sortOrder, setSortOrder] = useState('none');
     const [originalData, setOriginalData] = useState([]);
+    const [searchShow, setSearchShow] = useState('');
+    const [selectedGenere, setSelectedGenre] = useState('')
+    const [showSearchResults, setShowSearchResults] = useState(false);
+    
+    const genreMapping = {
+        1: 'Personal Growth',
+        2: 'True Crime and Investigative Journalism',
+        3: 'History',
+        4: 'Comedy',
+        5: 'Entertainment',
+        6: 'Business',
+        7: 'Fiction',
+        8: 'News',
+        9: 'Kids and Family',
+    };
+    
 
     useEffect(() => {
 
@@ -104,31 +125,87 @@ function Display() {
 
     };
 
+    const handleSearch = (e) => {
+        e.preventDefault()
+        if (searchShow.trim() !== "") {
+            const searchTitle = originalData.filter((show) => {
+                const matchShow = searchShow.trim() === '' || show.title.toLowerCase().includes(searchShow.toLowerCase());
+                return matchShow;
+            });
+            setOriginalData(searchTitle);
+            setShowSearchResults(true);
+        } else {
+            setOriginalData(data); // Reset to the original data if searchShow is empty
+            setShowSearchResults(false); 
+        }
+    };
+
+    const handleReturnBack = () => {
+        setSearchShow(''); // Clear the search input field
+        setOriginalData(data); // Reset to the original data
+        setShowSearchResults(false); // Set the flag to false to hide the search results
+    };
+    
+
     const renderedShows = originalData.map((show) => (
 
-        <Shows 
-            key={show.id} 
-            title={show.title} 
+        <Shows key={show.id}
+            title={show.title}
             description={show.description} 
-            image={show.image} 
+            image={show.image}
+            seasons={show.seasons}
             updated={show.updated} 
-            click={() => setIds(show.id)}
-        />
+            genres={show.genres.map(genreID => genreMapping[genreID])}
+           click={() => setIds(show.id)}
+         />
 
     ));
 
     return (
 
         <>
-
             <SignUp idno={ids} />
-            <DropdownMenu handleSort={handleSort} sortOrder={sortOrder} />
+
+
+              <div className='SearchContainer'>
+              <input type="text" placeholder="Search..." value={searchShow} onChange={(e) => setSearchShow(e.target.value)} /> 
+                <Button  onClick={handleSearch}>Search</Button> 
+            </div>
+
+            
+            {showSearchResults && (
+            // This div will only be rendered when showSearchResults is true
+            <div>
+               <Button onClick={handleReturnBack}>Return Back</Button>
+            </div>
+            )}
+
+           
+
+       
+            <div className='Sort'>
+               <DropdownMenu handleSort={handleSort} sortOrder={sortOrder} />
+            </div>
+
+            
+            {!showSearchResults && (
+            <div>
+              
+                <MyCarouselContainer />
+              
+            </div>
+            )}
+
+
+          
+
+            
 
             <Grid container spacing={5} sx={{ padding: '5% 10%' }}>
                 {loading ? <CircularProgress sx={{ position: 'absolute', bottom: 500, left: 900 }} /> : renderedShows} <FAB />
             </Grid>
 
-            <Footer sx={{ position: 'absolute', bottom: 0 }} />
+            
 
         </>
 
@@ -139,4 +216,3 @@ function Display() {
 
 
 export default Display;
-
