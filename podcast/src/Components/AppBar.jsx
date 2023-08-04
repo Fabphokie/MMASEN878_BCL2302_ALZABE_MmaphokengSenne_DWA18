@@ -6,19 +6,22 @@ import '../App.css';
 import Button from '@mui/material/Button'
 
 const navLinkStyling = {
-
   color: 'white',
   fontSize: '1em',
-  
+  background: 'linear-gradient(to bottom, #26A69A, #1E8274)',
+  padding: '10px 15px',
+  borderRadius: '5px',
 };
 
 const navBrandStyling = {
-
   color: 'white',
   fontWeight: 'bold',
-  fontSize: '3.5 em',
-
+  fontSize: '3.5em',
+  background: 'linear-gradient(to bottom, #26A69A, #1E8274)',
+  padding: '10px 15px',
+  borderRadius: '5px',
 };
+
 
 const navbarStyling = {
 
