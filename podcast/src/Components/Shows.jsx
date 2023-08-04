@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 
+
 import '../App.css'
 
 import { createTheme } from '@mui/material';
@@ -32,20 +33,23 @@ export default function Shows(props) {
 
     const [value, setValue] = useState(null)
     const [open, setOpen] = useState(false);
-    const showId = 'https://podcast-api.netlify.app/id/${showId}'; // Replace 'your-show-id' with the actual ID of the show
+    const showId = 'https://podcast-api.netlify.app/id/${showId}'; 
     const [favorited, setFavorited] = useState(false);
+    const [saveFavorites, setSaveFavorites] = useState([]);
     
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    
     const handleRatingChange = (event, newValue) => {
         setValue(newValue);
-        setFavorited(newValue === 5); // Set favorited to true when the Rating is clicked
+        setFavorited(newValue === 5); 
+        
     };
 
     const handleRemoveFavorite = () => {
         setFavorited(false);
-        setValue(null); // Reset the rating value to null when removing the favorite status
+        setValue(null); 
     };
 
     const style = {
@@ -83,7 +87,7 @@ export default function Shows(props) {
             
             
 
-            <Card sx={{borderBottom: '5px solid rgb(64, 200, 221) ', }}>
+            <Card sx={{borderBottom: '5px solid rgb(64, 200, 221) ', }} className='Card'>
                 <CardMedia
 
                     component="img"

@@ -61,7 +61,14 @@ body{
   background-color: #fdb1b143;
 }
 
+.Card{
+  transition: transform 0.3s ease;
 
+}
+
+.Card:hover{
+  transform: scale(1.2);
+}
 
 .Card--card {
   width: 500px;
@@ -135,8 +142,14 @@ body{
   height: 120px;
   margin-right: 20px;
   padding: 10px;
-  
+  transition: transform 0.3s ease;
+
 }
+
+.Logo--gif:hover{
+  transform: scale(1.2);
+}
+
 
 .SearchContainer {
   display: flex;

@@ -20,9 +20,15 @@ export default function Footer() {
             </div>
             <div className="social-media-icons">
                 
-                <FacebookIcon/>
-                <TwitterIcon />
-                <LinkedInIcon/>
+                <a href="https://www.facebook.com/mmaphokeng.senne" target="_blank" rel="noopener noreferrer">
+                    <FacebookIcon />
+                </a>
+                <a href="https://twitter.com/your-twitter-profile-url" target="_blank" rel="noopener noreferrer">
+                    <TwitterIcon />
+                </a>
+                <a href="https://www.linkedin.com/in/mmaphokeng-senne-109b21221" target="_blank" rel="noopener noreferrer">
+                    <LinkedInIcon />
+                </a>
 
             </div>
             <p>&copy; {new Date().getFullYear()} Your Website. All rights reserved.</p>

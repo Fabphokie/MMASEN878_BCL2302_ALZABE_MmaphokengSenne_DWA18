@@ -11,9 +11,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MyCarouselContainer from './MyCarouselContainer';
 
-
-
-
 const DropdownMenu = ({ handleSort, sortOrder }) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -135,15 +132,15 @@ function Display() {
             setOriginalData(searchTitle);
             setShowSearchResults(true);
         } else {
-            setOriginalData(data); // Reset to the original data if searchShow is empty
+            setOriginalData(data); 
             setShowSearchResults(false); 
         }
     };
 
     const handleReturnBack = () => {
-        setSearchShow(''); // Clear the search input field
-        setOriginalData(data); // Reset to the original data
-        setShowSearchResults(false); // Set the flag to false to hide the search results
+        setSearchShow(''); 
+        setOriginalData(data); 
+        setShowSearchResults(false); 
     };
     
 
@@ -167,14 +164,13 @@ function Display() {
             <SignUp idno={ids} />
 
 
-              <div className='SearchContainer'>
+            <div className='SearchContainer'>
               <input type="text" placeholder="Search..." value={searchShow} onChange={(e) => setSearchShow(e.target.value)} /> 
                 <Button  onClick={handleSearch}>Search</Button> 
             </div>
 
             
             {showSearchResults && (
-            // This div will only be rendered when showSearchResults is true
             <div>
                <Button onClick={handleReturnBack}>Return Back</Button>
             </div>

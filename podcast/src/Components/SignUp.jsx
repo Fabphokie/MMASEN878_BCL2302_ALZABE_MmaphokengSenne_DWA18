@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-// import HH from "./Seasons";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -25,7 +23,7 @@ export default function SignUp(props) {
                 .then(response => response.json())
                 .then(data => {
                     setSeasons(data);
-                    // seasonss.season.map((sea) => {console.log(sea)})
+                    
                     
                     const ey = seasonss.seasons
                     const bb = ey.map((y)=> {

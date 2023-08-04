@@ -12,13 +12,21 @@ export default function FAB() {
         position: 'fixed',
         bottom: 16,
         right: 16,
-
+        cursor: 'pointer', 
     };
+
+    const handleFabClick = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth', 
+        });
+    };
+
 
     return (
 
 
-        <Fab style={fabStyle}>
+        <Fab style={fabStyle} onClick={handleFabClick}>
 
             <ArrowUpwardIcon style={{ color: 'white', width: { xs: 300, lg: 300 }, height: { xs: 300, lg: 300 } }} />
 
