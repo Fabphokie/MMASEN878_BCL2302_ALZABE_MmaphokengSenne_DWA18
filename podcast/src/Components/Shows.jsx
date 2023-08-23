@@ -130,12 +130,14 @@ export default function Shows(props) {
 
                 
                 <CardContent>
-
+                    <Typography sx={{fontSize: '1.2em', }}>{props.genres}</Typography>
+                    <Typography> Season {props.seasons}</Typography>
                     <Typography variant="body2" color="text.secondary">
 
                         {props.description.substring(0, 101)}
 
                     </Typography>
+
 
                 </CardContent>
 

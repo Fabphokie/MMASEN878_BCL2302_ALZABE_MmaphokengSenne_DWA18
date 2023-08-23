@@ -33,7 +33,7 @@ export default function SignUp(props) {
                             <Accordion key={y.title}>
 
                             <AccordionSummary expandIcon = {<ExpandMoreIcon />} aria-controls="panel1a-content" id="panella-header">
-                                <Typography component='h1'>Seasons</Typography>
+                                <Typography component='h1'></Typography>
                                 <div style={{display: 'flex', flexDirection:'column'}}>
 
                                     <Typography component='h5'>{y.title}</Typography>

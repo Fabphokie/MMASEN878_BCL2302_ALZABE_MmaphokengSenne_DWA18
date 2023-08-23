@@ -39,14 +39,16 @@ const DropdownMenu = ({ handleSort, sortOrder }) => {
         <>
 
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                Sort {sortOrder === '[A-Z]' ? 'Ascending' : sortOrder === '[Z-A]' ? 'Descending' : 'None'}
+                Sort {sortOrder === '[A-Z]' ? 'Ascending' : sortOrder === '[Z-A]' ? 'Descending' : sortOrder ==='[Date Asc]' ? 'Ascending' : sortOrder === '[Date Desc]' ? 'Descending' : 'None'}
             </Button>
 
             <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
 
-                <MenuItem onClick={() => handleSortOption('[A-Z]')}> Ascending </MenuItem>
+                <MenuItem onClick={() => handleSortOption('[A-Z]')}> A - Z </MenuItem>
+                <MenuItem onClick={() => handleSortOption('[Z-A]')}> Z - A </MenuItem>
 
-                <MenuItem onClick={() => handleSortOption('[Z-A]')}> Descending </MenuItem>
+                <MenuItem onClick={() => handleSortOption('[Date Asc]')}>Date Asc</MenuItem>
+                <MenuItem onClick={() => handleSortOption('[Date Desc]')}> Date Desc</MenuItem>
 
                 <MenuItem onClick={() => handleSortOption('none')}> None </MenuItem>
 
@@ -101,42 +103,42 @@ function Display() {
     }
 
     const handleSort = (sortOrder) => {
-
         setSortOrder(sortOrder);
-
+    
         if (sortOrder === '[A-Z]') {
-
             setOriginalData([...originalData].sort((a, b) => a.title.localeCompare(b.title)));
-            console.log('a')
-
         } else if (sortOrder === '[Z-A]') {
-
             setOriginalData([...originalData].sort((a, b) => b.title.localeCompare(a.title)));
-            console.log('d')
-
+        } else if (sortOrder === '[Date Asc]') {
+            setOriginalData([...originalData].sort((a, b) => new Date(a.updated) - new Date(b.updated)));
+        } else if (sortOrder === '[Date Desc]') {
+            setOriginalData([...originalData].sort((a, b) => new Date(b.updated) - new Date(a.updated)));
         } else {
-
             setOriginalData(data);
-
-        }
-
-    };
-
-    const handleSearch = (e) => {
-        e.preventDefault()
-        if (searchShow.trim() !== "") {
-            const searchTitle = originalData.filter((show) => {
-                const matchShow = searchShow.trim() === '' || show.title.toLowerCase().includes(searchShow.toLowerCase());
-                return matchShow;
-            });
-            setOriginalData(searchTitle);
-            setShowSearchResults(true);
-        } else {
-            setOriginalData(data); 
-            setShowSearchResults(false); 
         }
     };
+    
+   const handleSearch = (e) => {
+    e.preventDefault();
 
+    if (searchShow.trim() !== "") {
+        const searchResults = originalData.filter((show) => {
+            const matchTitle = show.title.toLowerCase().includes(searchShow.toLowerCase());
+            const matchGenres = show.genres.some((genreID) =>
+                genreMapping[genreID].toLowerCase().includes(searchShow.toLowerCase())
+            );
+
+            return matchTitle || matchGenres;
+        });
+        setOriginalData(searchResults);
+        setShowSearchResults(true);
+    } else {
+        setOriginalData(data);
+        setShowSearchResults(false);
+    }
+};
+
+    
     const handleReturnBack = () => {
         setSearchShow(''); 
         setOriginalData(data); 

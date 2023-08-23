@@ -16,7 +16,7 @@ const navLinkStyling = {
 const navBrandStyling = {
   color: 'white',
   fontWeight: 'bold',
-  fontSize: '3.5em',
+  fontSize: '1.3em',
   background: 'linear-gradient(to bottom, #26A69A, #1E8274)',
   padding: '10px 15px',
   borderRadius: '5px',
